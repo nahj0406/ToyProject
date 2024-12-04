@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>그림판 만들기</title>
+   <style>
+      .canvas {background: #eee;}
+      .color-btn {
+         width: 30px;
+         height: 30px;
+         border: 0;
+         border-radius: 50%;
+      }
+      .color-btn[data-color='black'] {background: black;}
+      .color-btn[data-color='red'] {background: red;}
+      .color-btn[data-color='green'] {background: green;}
+      .color-btn[data-color='blue'] {background: blue;}
+      .image-btn {
+         width: 40px; height: 40px;
+         background: url(./images/rocket.png) no-repeat center center / cover;
+      }
+      .control > button {
+         position: relative;
+      }
+      .control > button::before {
+         position: absolute; width: 10%; height: 10%;
+         border: 2px solid #000; border-radius: 50%;
+         content:''; top: 50%; left: 50%; transform: translate(-50%, -50%);
+         transition: 0.2s 0.1s; opacity: 0;
+      }
+      .control > button.active::before {
+         opacity: 1; width: 120%; height: 120%;
+      }
+   </style>
+</head>
+<body>
+   <canvas class="canvas" width="600" height="400"></canvas>
+   <div class="control">
+      <button class="color-btn" data-type="color" data-color="black"></button>
+      <button class="color-btn" data-type="color" data-color="red"></button>
+      <button class="color-btn" data-type="color" data-color="green"></button>
+      <button class="color-btn" data-type="color" data-color="blue"></button>
+      <button class="image-btn" data-type="image"></button>
+      <button class="save-btn">그림 저장</button>
+      <div class="result-image"></div>
+   </div>
+
+   <script>
+      const canvas = document.querySelector('.canvas');
+      const context = canvas.getContext('2d');
+      const control = document.querySelector('.control');
+      const saveBtn = document.querySelector('.save-btn');
+      const resultImage = document.querySelector('.result-image');
+      let drawingMode; // true일때만 그리기.
+      let brush = 'color'; // color 또는 image
+      let colorVal = 'black';
+
+      const imgElem = new Image();
+      imgElem.src = './images/rocket.png';
+
+      function downHandler() {
+         drawingMode = true;
+      }
+
+      function upHandler() {
+         drawingMode = false;
+      }
+
+      function moveHandler(e) { // 그리기
+         if(!drawingMode) return;
+
+         switch (brush) {
+            case 'color':
+               context.beginPath();
+               //layerX, e.layerY : event 객체에 들어가 있는 것. 현재 캔버스 
+               // 기준 클릭한 위치를 보여줌 (이벤트리스너가 클릭이니까) clienatX는 브라우저 기준. 
+               // 그래서 캔버스 클릭해도 브라우저 위치 좌표를 따라간다.
+               context.arc(e.layerX, e.layerY, 10, 0, Math.PI*2, false);
+               context.fill();
+               break;
+            case 'image':
+               context.drawImage(imgElem, e.layerX, e.layerY, 50, 50);
+               break;
+         }
+      }
+
+      function setColor(e) { //컬러 설정, 브러쉬 설정
+         brush = e.target.getAttribute('data-type');
+         colorVal = e.target.getAttribute('data-color');
+         context.fillStyle = colorVal;
+         
+         const colorchild = document.querySelectorAll('.control > *');
+         colorchild.forEach(el => el.classList.remove('active'));
+         e.target.classList.add('active');
+      }
+
+      function createImage() { // 이미지 저장
+         const url = canvas.toDataURL('image/png');
+         const imgElem = new Image();
+         imgElem.src = url;
+         resultImage.appendChild(imgElem);
+      }
+
+
+      // const colorBtn = document.querySelectorAll('.color-btn');
+      // colorBtn.forEach(button => { // 직접 해본거.
+      //    button.addEventListener('click', () => {
+      //       const colorValue = button.getAttribute('data-color');
+      //       context.fillStyle = `${colorValue}`;
+      //       //fill색 바꿀때 #11xd 이런거나 red 이런식이면 fillStyle로 바꿔야 함.
+      //    })
+      // })
+
+      canvas.addEventListener('mousedown', downHandler);
+      canvas.addEventListener('mousemove', moveHandler);
+      canvas.addEventListener('mouseup', upHandler);
+      control.addEventListener('click', setColor);
+      saveBtn.addEventListener('click', createImage);
+   </script>
+</body>
+</html>
