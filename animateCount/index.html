@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>숫자카운트 입력기</title>
+   <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+   
+   <div class="container">
+      <h1>10년간 저희를 이용해주신 고객!</h1>
+      <article class="countBox">
+         <div class="count1">
+            <h4 id="countN1">00</h4>
+            <span>시간</span>
+         </div>
+
+         <div class="count2">
+            <h4 id="countN2">00</h4>
+            <span>개</span>
+         </div>
+
+         <div class="count3">
+            <h4 id="countN3">00</h4>
+            <span>명</span>
+         </div>
+      </article>
+   </div>
+
+   <div class="inputBox">
+      <article class="countBox" id="input_wrap">
+         <div class="count1">
+            <input type="text" class="numInput" id="numInput1">
+            <span>시간</span>
+         </div>
+
+         <div class="count2">
+            <input type="text" class="numInput" id="numInput2">
+            <span>개</span>
+         </div>
+
+         <div class="count3">
+            <input type="text" class="numInput" id="numInput3">
+            <span>명</span>
+         </div>
+      </article>
+   </div>
+
+   <button class="submit" onclick="checkCountAnimate()">입력하기</button>
+
+   <script>
+
+      const input_wrap = document.getElementById('input_wrap');
+
+      input_wrap.addEventListener('input', (e) => {
+         if(e.target.classList.contains('numInput')) { // 숫자만 입력
+            const NumValue = e.target.value.replace(/[^0-9\s]/g, '');
+            if(e.target.value !== NumValue) {
+               alert('숫자만 입력 가능해요')
+            }
+
+            if(e.target.value.length > 5) { //자릿수 제한
+               alert('5자리 이하로만 작성해 주세요.');
+               setTimeout(() => {
+                  e.target.value = '';
+               }, 0);
+            }
+
+            e.target.value = NumValue;
+         }
+      })
+
+      
+      let counts = [ // 표기 필드
+         document.getElementById('countN1'),
+         document.getElementById('countN2'),
+         document.getElementById('countN3'),
+      ];
+
+      // 입력필드
+      let inputs = [
+         document.getElementById('numInput1'),
+         document.getElementById('numInput2'),
+         document.getElementById('numInput3'),
+      ]
+
+      function checkCountAnimate() {
+         const values = inputs.map(input => input.value.trim());
+
+         // 비어있거나 숫자가 아닌 입력 확인
+         if (values.some(val => !val || isNaN(val))) {
+            alert('모든 필드에 유효한 숫자를 입력해 주세요.');
+            return;
+         }
+
+         // 값이 0 이하인 경우 처리
+         if (values.some(val => Number(val) <= 0)) {
+            alert('값은 0보다 커야 합니다.');
+            return;
+         }
+
+         // 목표 값 설정
+         const targets = values.map(Number);
+         animateCount(targets);
+      }
+
+      function animateCount(targets) {
+         const currents = counts.map(count => Number(count.textContent) || 0); // NaN 방지
+
+         function animate() {
+            const steps = targets.map((target, index) => Math.ceil((target - currents[index]) / 20));
+
+            steps.forEach((step, index) => {
+               if (currents[index] < targets[index]) currents[index] += step;
+               if (currents[index] >= targets[index]) currents[index] = targets[index];
+            });
+
+            counts.forEach((count, index) => {
+               count.textContent = new Intl.NumberFormat('ko-KR').format(currents[index]);
+            });
+
+            if (currents.some((current, index) => current < targets[index])) {
+               requestAnimationFrame(animate);
+            }
+         }
+
+         requestAnimationFrame(animate);
+      }
+
+   </script>
+</body>
+</html>
