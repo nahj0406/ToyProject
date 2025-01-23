@@ -1,0 +1,68 @@
+html {font-size: min(calc(10 / 500 * 100vw), 10px);}
+body {
+   margin: 0; padding: 0; background: #fdd6d6;
+   padding:  0 15px;
+}
+h1,h2,h3,h4,h5,label {margin: 0;}
+* {line-height: 1; box-sizing: border-box;}
+
+
+
+.container {
+   background: #eee; padding: 3rem;
+   margin: 10rem auto 3rem; width: fit-content;
+   border: 3px solid #d6a9a9;
+   border-radius: 10px;
+}
+
+.container > h1 {
+   font-size: max(16px, 2rem); text-align: center;
+   margin-bottom: 3rem;
+}
+
+.countBox {
+   display: flex; align-items: center;
+   justify-content: center; gap: 3rem;
+}
+
+.countBox > * {
+   display: flex; align-items: center;
+   font-size: 30px; gap: 5px;
+}
+
+.countBox > * span {font-size: 15px;}
+
+.inputBox {
+   width: fit-content; margin: 0 auto;
+   padding: 20px; border-radius: 10px; 
+   background: #0000006b;
+}
+
+.inputBox .countBox > * input {
+   border: none; height: 30px; background: rgba(0,0,0,0.5);
+   font-size: 2rem; width: 150px; color: #fff; font-weight: 400;
+   padding: 0 10px;
+}
+.inputBox .countBox > * {gap: 10px;}
+.inputBox .countBox > * input:focus-visible {outline: none;}
+
+.inputBox .countBox > * span {color: #fff; min-width: 30px;}
+
+.submit {
+   border: none;
+   background: #ff9b00;
+   padding: 15px 25px;
+   border-radius: 5px;
+   margin: 20px auto 0;
+   display: block;
+   font-weight: 500;
+   color: #fff;
+   transition: 0.2s;
+   cursor: pointer;
+}
+
+.submit:hover, .submit:active  {background: #c47704;}
+
+@media (max-width: 768px) {
+   .countBox {flex-direction: column;}
+}
