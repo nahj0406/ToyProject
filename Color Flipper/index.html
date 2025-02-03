@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Color Flipper</title>
+   <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+   <section class="color_controller">
+      <div class="color_tag">
+         <h1><b>Background Color :</b> <span id="col_name">normal</span></h1>
+      </div>
+
+      <div class="val_box">
+         <p class="text1">컬러 이름 또는 색상을 넣어주세요.</p>
+         <input type="text" id="col_val">
+      </div>
+
+
+      <button type="button" id="submit" onclick="colorChange()">CLICK ME</button>
+   </section>
+
+   <script>
+      let $val_input = document.getElementById('col_val');
+
+      $val_input.addEventListener('keyup', function(e) {
+         if(e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById('submit').click();
+         }
+      });
+
+
+      function colorChange() {
+         let $val = document.getElementById('col_val');
+         let $colName = document.getElementById('col_name');
+         const $body = document.querySelector('body');
+
+         if($val.value === '') {
+            alert('값을 입력해 주세요.');
+            return false;
+         }
+
+         const colorTest = document.createElement('div');
+         colorTest.style.color = $val.value;
+
+         if(colorTest.style.color === '') {
+            alert('유효하지 않은 값입니다.');
+            $val.value = '';
+            return false;
+         }
+         $colName.innerText = $val.value;
+         $colName.style.color = $val.value;
+
+         $body.style.backgroundColor = $val.value;
+         $body.style.setProperty('--child-color', `${$val.value}`);
+         $body.style.setProperty('--child-invert', 'invert()');
+         
+      }
+   </script>
+</body>
+</html>

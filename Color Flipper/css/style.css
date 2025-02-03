@@ -1,0 +1,84 @@
+* {box-sizing: border-box; padding: 0; margin: 0;}
+
+body {
+   --transition : 0.5s 0.1s;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   transition: var(--transition);
+}
+.color_controller {
+   width: fit-content;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 50px;
+}
+
+.color_controller .color_tag {
+   background: #333;
+   border-radius: 10px;
+   padding: 10px 20px;
+   color: #fff;
+   letter-spacing: 2px;
+   font-size: 20px;
+   transition: var(--transition);
+}
+
+.color_controller .color_tag h1 {
+   color : #fff;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+.color_controller .color_tag #col_name {text-transform: uppercase;}
+
+.color_controller .val_box {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-items: center;
+   gap: 10px;
+   text-align: center;
+}
+
+.color_controller .val_box p.text1 {
+   color: var(--child-color, #111);
+   font-size: 16px;
+   filter: var(--child-invert);
+}
+
+.color_controller #col_val {
+   height: 50px;
+   padding: 5px 10px;
+   width: 200px;
+   text-align: center;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.color_controller button {
+   border: 1px solid var(--child-color, #333); 
+   background: none;
+   padding: 10px 20px;
+   font-size: 18px;
+   letter-spacing: 1px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 0.1s;
+   position: relative;
+   top: 0;
+   background: #111;
+   color: #fff;
+}
+
+.color_controller button:active {
+   top: 5px;
+}
+
+@media (max-width: 450px) {
+   body {padding: 0 15px;}
+   .color_controller .color_tag {font-size: 16px; text-align: center;}
+}
