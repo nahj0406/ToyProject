@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>카운터 만들기</title>
+   <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+   <div id="Counter">
+      <h1>Counter</h1>
+      <span id="value">0</span>
+
+      <div class="controller">
+         <div class="btn" id="decrease">decrease</div>
+         <div class="btn" id="reset">reset</div>
+         <div class="btn" id="increase">increase</div>
+      </div>
+   </div>
+
+   <script>
+      let $value = document.getElementById('value');
+      const $btns = document.querySelectorAll('.btn');
+      let num = 0;
+
+      $btns.forEach((item, i) => {
+         item.addEventListener('click', function() {
+            const text = item.textContent.trim().toLowerCase();
+
+            if(text === "increase") {
+               num += 1;
+            } else if (text === "decrease") {
+               num -= 1;
+            } else if (text === "reset") {
+               num = 0;
+            }
+
+            if(num > 0) {
+               $value.style.color = '#00a846';
+            } else if(num < 0) {
+               $value.style.color = '#ff2424';
+            } else {
+               $value.style.color = '#000';
+            }
+
+            $value.innerText = num;
+         })
+      });
+
+   </script>
+</body>
+</html>
