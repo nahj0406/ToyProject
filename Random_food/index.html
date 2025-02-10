@@ -5,41 +5,48 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>식사 메뉴 랜덤 추천기</title>
    <link rel="stylesheet" href="css/style.css">
+
+   <!-- 보완점 
+      1. 카테고리 클릭하면 카테고리명이 뭐 먹지..기본 제목을 바꾸기. 
+   
+   -->
 </head>
 <body>
-   <div id="Counter">
-      <h1>메뉴 추천</h1>
-
-      <div class="menu_box" id="menu">뭐 먹지...</div>
-
-      <div class="filter">
-         <button type="button" id="food_reset">초기화</button>
-
-         <label for="food_kor">
-            <span>한식</span>
-            <input type="radio" name="food_check" class="food_input" id="food_kor">
-         </label>
-
-         <label for="food_jap">
-            <span>일식</span>
-            <input type="radio" name="food_check" class="food_input" id="food_jap">
-         </label>
-
-         <label for="food_cha">
-            <span>중식</span>
-            <input type="radio" name="food_check" class="food_input" id="food_cha">
-         </label>
-
-         <label for="food_eng">
-            <span>양식</span>
-            <input type="radio" name="food_check" class="food_input" id="food_eng">
-         </label>
-
-         <label for="food_eve">
-            <span>야식</span>
-            <input type="radio" name="food_check" class="food_input" id="food_eve">
-         </label>
+   <div id="container">
+      <div class="menu_header">
+         <h1>메뉴 추천</h1>
+   
+         <div class="filter">
+            <button type="button" id="food_reset">초기화</button>
+   
+            <label for="food_kor">
+               <span>한식</span>
+               <input type="radio" name="food_check" class="food_input" id="food_kor">
+            </label>
+   
+            <label for="food_jap">
+               <span>일식</span>
+               <input type="radio" name="food_check" class="food_input" id="food_jap">
+            </label>
+   
+            <label for="food_cha">
+               <span>중식</span>
+               <input type="radio" name="food_check" class="food_input" id="food_cha">
+            </label>
+   
+            <label for="food_eng">
+               <span>양식</span>
+               <input type="radio" name="food_check" class="food_input" id="food_eng">
+            </label>
+   
+            <label for="food_eve">
+               <span>야식</span>
+               <input type="radio" name="food_check" class="food_input" id="food_eve">
+            </label>
+         </div>
       </div>
+
+      <div class="menu_box">뭐 먹지...</div>
 
       <div class="controller">
          <div class="btn" id="decision">결정!</div>
