@@ -1,0 +1,80 @@
+* {margin: 0; padding: 0; box-sizing: border-box; line-height: 1;}
+button {border: none;}
+
+body {
+   background: #beeaff; height: 100vh;
+   display: flex; align-items: center; justify-content: center;
+}
+
+.container {
+   width: 100%; padding: 0 15px;
+}
+
+.container > h1 {
+   text-align: center; color: #111; 
+   position: relative; font-size: 40px;
+   letter-spacing: 3px; margin-bottom: 50px;
+}
+
+.container > h1::before {
+   content:''; position: absolute;
+   transform: translate(-50%, -50%);
+   left: 50%; top: 50px;
+   width: 80px; height: 5px;
+   background: #28b0ff;
+}
+
+.container .reviews {
+   padding: 30px 40px; background: #fff; margin: 0 auto;
+   width: 100%; max-width: 700px; text-align: center;
+   border-radius: 5px; box-shadow: 5px 5px 1px 0px #636363;
+   display: flex; flex-direction: column;
+   align-items: center;
+}
+
+.container .reviews .img {
+   width: 150px; height: 150px; margin-bottom: 40px;
+   border-radius: 50%; background: #eee;
+   position: relative;
+   box-shadow: 10px 0px #28b0ff;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center center;
+}
+
+.container .reviews .name_box {margin-bottom: 20px;}
+.container .reviews .name_box > h3 {font-size: 25px; margin-bottom: 10px; color: #111;}
+.container .reviews .name_box > h5 {font-size: 16px; color: #28b0ff;}
+
+.container .reviews .content {min-height: 100px;}
+.container .reviews .content > p {line-height: 1.4; font-size: 14px; color: #333;}
+
+.container .reviews .controller {display: flex; gap: 10px; margin: 10px auto;}
+.container .reviews .controller .con_btn {
+   font-size: 15px; background: #28b0ff; border-radius: 50%;
+   width: 30px; height: 30px; display: flex; color: #fff;
+   align-items: center; justify-content: center; cursor: pointer;
+   transition: 0.3s;
+}
+
+.container .reviews .controller > .con_btn:hover {
+   background: #333;
+}
+
+.container .reviews #random_btn {
+   border: 2px solid #46b9fc;
+   background: none;
+   padding: 10px 50px;
+   border-radius: 10px;
+   color: #000; font-weight: 500;
+   text-transform: uppercase;
+   cursor: pointer;
+   position: relative; top: 0;
+   transition: 0.2s;
+}
+
+.container .reviews #random_btn:active {
+   background: #46b9fc;
+   color: #fff;
+   top: 5px;
+}
