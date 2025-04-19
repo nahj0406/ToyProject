@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카운트다운 시계</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section class="container">
+        <div class="timeBox">
+            <article class="time_item"><h1 id="Day">00</h1><span>days</span></article>
+            <article class="time_item"><h1 id="Hours">00</h1><span>hours</span></article>
+            <article class="time_item"><h1 id="Mins">00</h1><span>mins</span></article>
+            <article class="time_item"><h1 id="Secs">00</h1><span>secs</span></article>
+        </div>
+    </section>
+
+
+    <script>
+        const $Day = document.getElementById('Day');
+        const $Hours = document.getElementById('Hours');
+        const $Mins = document.getElementById('Mins');
+        const $Secs = document.getElementById('Secs');
+
+        const futureDate = new Date(2025, 3, 30, 4, 0, 0);
+
+        function format(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        function updateCountDown() {
+            const now = new Date();
+            const diff = futureDate - now;
+
+            if(diff <= 0) {
+                $Day.textContent = '00';
+                $Hours.textContent = '00';
+                $Mins.textContent = '00';
+                $Secs.textContent = '00';
+                clearInterval(timerId);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const sec = Math.floor((diff / 1000) % 60);
+            
+            $Day.textContent = format(days);
+            $Hours.textContent = format(hours);
+            $Mins.textContent = format(mins);
+            $Secs.textContent = format(sec);
+        }
+
+        
+        const timerId = setInterval(updateCountDown, 1000);
+        updateCountDown();
+    </script>
+</body>
+</html>
